@@ -7,35 +7,35 @@
 
 #include "BarPlot.h"
 
-BarPlot::BarPlot() {//dummy data
-    for(int i = 1; i < 6; i ++){
-        TCathegory tmp("sth", i);
-        cathegories.push_back(tmp);
-        
-    }
-}
-
-BarPlot::BarPlot(const BarPlot& orig) {
+BarPlot::BarPlot(ifstream& infile): Graph(infile) {
+//    for(int i = 1; i < 6; i ++){
+//        TCathegory tmp("sth", i);
+//        cathegories.push_back(tmp);
+//        
+//    }
 }
 
 BarPlot::~BarPlot() {
 }
 
 void BarPlot::print(ofstream& out){
+    for(auto i: cathegories){
+        cout << i.name << "(" << i.count << ")" << " ma rank " << i.rank << endl;
+    }
     /**for every row **/
-    for(int i = 5; i >= 0; i--){  //dummy max val = 5
+    for(int i = 9; i >= 0; i--){  
         
         cout << i << " | ";
          /**for every column **/
         for(int j = cathegories.size()-1; j >= 0; j-- ){
             if(cathegories[j].rank == i){
-                cout << " ____ ";
+                cout << " ______ ";
             } 
             else if(cathegories[j].rank > i){
-                cout << "|    |";
+                cout << "|      |";
             } 
             else{
-                cout << "      ";
+                cout << "        ";
             }
             cout << "  ";
         }
