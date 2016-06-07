@@ -20,19 +20,22 @@
 #include <vector>
 #include <algorithm>
 #include <set>
+#include <sstream>
 #include <queue>
 #include <stdint.h>
 
 using namespace std;
 class Graph {
 public:
-    Graph();
+    Graph( ifstream& infile);
     Graph(const Graph& orig);
     virtual ~Graph();
     virtual void print(ofstream&) = 0;
+    void setRanks();
     struct TCathegory{
-        TCathegory(string na, int nu):name(na),rank(nu){};
+        TCathegory(string na, int nu):name(na),count(nu){};
         string name;
+        int count;
         int rank;
     };
 protected:
