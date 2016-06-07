@@ -26,10 +26,13 @@ void BarPlot::print(ofstream& out){
     /**for every row **/
     for(int i = height; i >= 0; i--){  
         
+        
         out << i;
-        if(i < 10) out << " ";
+        if(i < 10) out << "  ";
+        else if(i < 100) out << " ";
         out << "| ";
-         /**for every column **/
+        
+        /**for every column **/
         for(int j = cathegories.size()-1; j >= 0; j-- ){
             if(cathegories[j].rank == i){
                 printRow(out, ' ', '_');
@@ -44,6 +47,19 @@ void BarPlot::print(ofstream& out){
         }
         out << endl;
     }
+    out << "   ";
+    int offset = 4;
+    for(int j = cathegories.size()-1; j >= 0; j-- ){
+        for(int k = 0; k < offset; k++)
+            out << " ";
+        
+        out << cathegories[j].name;
+        
+        for(int i = cathegories[j].name.size() +  offset ; i < width + 4; i++ )
+            out << " ";
+    }
+         
+    out << endl;
     for(int i = (cathegories.size()-1) * (width +7 ) + 3; i > 0; i--)
         out << "_";
     out << endl;
