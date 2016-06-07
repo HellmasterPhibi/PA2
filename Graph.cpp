@@ -33,9 +33,8 @@ void Graph::setRanks(){
             max = i.count;
     }
     cout << "max = " << max <<endl;
-    for(auto i: cathegories){
-        i.rank = (i.count * 10) / max;
-        cout << i.name << " ma rank " << i.rank << endl;
+    for(size_t i = 0;i < cathegories.size();i++){
+        cathegories[i].rank = (cathegories[i].count * 10) / max;
     }
     
     
