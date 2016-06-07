@@ -8,40 +8,43 @@
 #include "BarPlot.h"
 
 BarPlot::BarPlot(ifstream& infile): Graph(infile) {
-//    for(int i = 1; i < 6; i ++){
-//        TCathegory tmp("sth", i);
-//        cathegories.push_back(tmp);
-//        
-//    }
+    width = 10;
 }
 
 BarPlot::~BarPlot() {
 }
 
+void BarPlot::printRow(ofstream& out, char sides, char fill)const{
+    out << sides;
+        for(int k = 0; k < width; k++) 
+            out <<  fill;
+    out << sides;
+
+}
+
 void BarPlot::print(ofstream& out){
-    for(auto i: cathegories){
-        cout << i.name << "(" << i.count << ")" << " ma rank " << i.rank << endl;
-    }
     /**for every row **/
-    for(int i = 9; i >= 0; i--){  
+    for(int i = height; i >= 0; i--){  
         
-        cout << i << " | ";
+        out << i;
+        if(i < 10) out << " ";
+        out << "| ";
          /**for every column **/
         for(int j = cathegories.size()-1; j >= 0; j-- ){
             if(cathegories[j].rank == i){
-                cout << " ______ ";
+                printRow(out, ' ', '_');
             } 
             else if(cathegories[j].rank > i){
-                cout << "|      |";
+                printRow(out, '|', ' ');
             } 
             else{
-                cout << "        ";
+                printRow(out, ' ', ' ');
             }
-            cout << "  ";
+            out << "  ";
         }
-        cout << endl;
+        out << endl;
     }
-    for(int i = (cathegories.size()-1) * 10 + 3; i > 0; i--)
-        cout << "-";
-    cout << endl;
+    for(int i = (cathegories.size()-1) * (width +7 ) + 3; i > 0; i--)
+        out << "_";
+    out << endl;
 }

@@ -9,6 +9,7 @@
 
 
 Graph::Graph(ifstream& infile) {
+     height = 30;
      string line, tmp;
      if (infile.is_open()){
          getline (infile,line);
@@ -32,9 +33,8 @@ void Graph::setRanks(){
         if (max < i.count)
             max = i.count;
     }
-    cout << "max = " << max <<endl;
     for(size_t i = 0;i < cathegories.size();i++){
-        cathegories[i].rank = (cathegories[i].count * 10) / max;
+        cathegories[i].rank = (cathegories[i].count * height) / max;
     }
     
     

@@ -31,8 +31,14 @@ int main(int argc, char** argv) {
     outfile.open("newTest",  ios::out);
     if (outfile.fail()){ return false;}
     
-    BarPlot b;
+    ifstream infile;
+    infile.open("trainData.csv",  ios::in);
+    if (infile.fail()){ cout << "Cannot open file" << endl;}
+    
+    BarPlot b(infile);
     b.print(outfile);
+    
+    outfile.close();
     
     return 0;
 }

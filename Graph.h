@@ -40,6 +40,7 @@ public:
     };
 protected:
     vector<TCathegory> cathegories;
+    int height;
 };
 
 #endif	/* GRAPH_H */

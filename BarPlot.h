@@ -15,11 +15,12 @@ using namespace std;
 
 class BarPlot: public Graph {
 public:
-    BarPlot();
-    BarPlot(const BarPlot& orig);
+    BarPlot(ifstream& infile);
     virtual ~BarPlot();
     virtual void print(ofstream& out);
 private:
+    int width;
+    void printRow(ofstream& out, char sides, char fill)const;
 
 };
 
