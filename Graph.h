@@ -43,6 +43,8 @@ protected:
     vector<string> cathegoryNames;
     int height;
     int column;
+    int max;
+    int digits(int) const;
 };
 
 #endif	/* GRAPH_H */

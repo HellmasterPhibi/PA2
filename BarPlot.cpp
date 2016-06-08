@@ -47,10 +47,10 @@ void BarPlot::print(ofstream& out){
     
     /**for every row **/
     for(int i = height; i >= 0; i--){        
-        
-        out << i;
-        if(i < 10) out << "  ";
-        else if(i < 100) out << " ";
+        int val = (i * max)/height;
+        out << val;
+        for(int k = digits(val); k < digits(max); k++)
+            out << " ";
         out << "| ";
         
         /**for every column **/

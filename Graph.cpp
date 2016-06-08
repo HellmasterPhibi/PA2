@@ -11,6 +11,8 @@
 Graph::Graph(ifstream& infile) {
      height = 30;
      column = 3;
+     max = 0;
+    
      string line, tmp;
      if (infile.is_open()){
          getline (infile,line);
@@ -33,18 +35,27 @@ Graph::Graph(ifstream& infile) {
 }
 
 void Graph::setRanks(){
-    int max = 0;
     for(auto i: cathegories){
         if (max < i.count)
             max = i.count;
     }
+    max += max/5;
     for(size_t i = 0;i < cathegories.size();i++){
         cathegories[i].rank = (cathegories[i].count * height) / max;
     }
-    
-    
+}
+
+int Graph::digits(int input) const{
+    string helpString; 
+    ostringstream convert;
+    convert << input;      
+    helpString = convert.str(); 
+    int result = helpString.size();
+    return result;
     
 }
+
+
 Graph::Graph(const Graph& orig) {
 }
 
