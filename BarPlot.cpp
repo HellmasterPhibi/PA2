@@ -47,7 +47,7 @@ void BarPlot::print(ofstream& out){
     
     /**for every row **/
     for(int i = height; i >= 0; i--){        
-        int val = (i * max)/height;
+        int val = (i * max)/height; /**backtracking the initial value from i - the result is not precise, but faster than getting the value from for cycle*/
         out << val;
         for(int k = digits(val); k < digits(max); k++)
             out << " ";
