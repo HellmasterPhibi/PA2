@@ -21,6 +21,7 @@
 #include <stdint.h>
 #include "Graph.h"
 #include "BarPlot.h"
+#include "LinePlot.h"
 
 using namespace std;
 
@@ -28,15 +29,17 @@ int main(int argc, char** argv) {
     
     
     ofstream outfile;
-    outfile.open("newTest",  ios::out);
+    outfile.open("lineTest",  ios::out);
     if (outfile.fail()){ return false;}
     
     ifstream infile;
-    infile.open("trainData.csv",  ios::in);
+    infile.open("sells.csv",  ios::in);
     if (infile.fail()){ cout << "Cannot open file" << endl;}
     
-    BarPlot b(infile);
-    b.print(outfile);
+    //BarPlot b(infile);
+    //b.print(outfile);
+    LinePlot l(infile);
+    l.print(outfile);
     
     outfile.close();
     

@@ -10,7 +10,7 @@
 
 Graph::Graph(ifstream& infile) {
      height = 30;
-     column = 3;
+     column = 1;
      max = 0;
     
      string line, tmp;

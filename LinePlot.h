@@ -8,13 +8,18 @@
 #ifndef LINEPLOT_H
 #define	LINEPLOT_H
 
-class LinePlot {
-public:
-    LinePlot();
-    LinePlot(const LinePlot& orig);
-    virtual ~LinePlot();
-private:
+#include "Graph.h"
 
+using namespace std;
+
+class LinePlot: public Graph  {
+public:
+    LinePlot(ifstream& infile);
+    virtual ~LinePlot();
+    virtual void print(ofstream& out);
+private:
+    char fill;
+    int width;
 };
 
 #endif	/* LINEPLOT_H */
