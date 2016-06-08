@@ -21,6 +21,7 @@ public:
 private:
     int width;
     void printRow(ofstream& out, char sides, char fill)const;
+    void printAxisX(ofstream& out)const;
 
 };
 

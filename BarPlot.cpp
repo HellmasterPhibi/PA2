@@ -22,10 +22,31 @@ void BarPlot::printRow(ofstream& out, char sides, char fill)const{
 
 }
 
-void BarPlot::print(ofstream& out){
-    /**for every row **/
-    for(int i = height; i >= 0; i--){  
+void BarPlot::printAxisX(ofstream& out)const{
+    out << "   ";
+    int offset = 4;
+    for(int j = cathegories.size()-1; j >= 0; j-- ){
+        for(int k = 0; k < offset; k++)
+            out << " ";
         
+        out << cathegories[j].name;
+        
+        for(int i = cathegories[j].name.size() +  offset ; i < width + 4; i++ )
+            out << " ";
+    }
+         
+    out << endl;
+    for(int i = (cathegories.size()-1) * (width +7 ) + 3; i > 0; i--)
+        out << "_";
+    out << endl;
+
+}
+
+void BarPlot::print(ofstream& out){
+    out << cathegoryNames[column] << endl;
+    
+    /**for every row **/
+    for(int i = height; i >= 0; i--){        
         
         out << i;
         if(i < 10) out << "  ";
@@ -47,20 +68,5 @@ void BarPlot::print(ofstream& out){
         }
         out << endl;
     }
-    out << "   ";
-    int offset = 4;
-    for(int j = cathegories.size()-1; j >= 0; j-- ){
-        for(int k = 0; k < offset; k++)
-            out << " ";
-        
-        out << cathegories[j].name;
-        
-        for(int i = cathegories[j].name.size() +  offset ; i < width + 4; i++ )
-            out << " ";
-    }
-         
-    out << endl;
-    for(int i = (cathegories.size()-1) * (width +7 ) + 3; i > 0; i--)
-        out << "_";
-    out << endl;
+    printAxisX(out);
 }

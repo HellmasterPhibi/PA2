@@ -10,16 +10,21 @@
 
 Graph::Graph(ifstream& infile) {
      height = 30;
+     column = 3;
      string line, tmp;
      if (infile.is_open()){
          getline (infile,line);
+         stringstream names(line);
+            while(getline(names, tmp,','))
+                cathegoryNames.push_back(tmp);
+         
         while ( getline (infile,line) ){
             stringstream ss(line);
             vector<string> tmpVec;
             while(getline(ss, tmp,','))
                 tmpVec.push_back(tmp);
             
-            TCathegory cath(tmpVec[0],stoi(tmpVec[3]));
+            TCathegory cath(tmpVec[0],stoi(tmpVec[column]));
             cathegories.push_back(cath);
         }
          setRanks();
