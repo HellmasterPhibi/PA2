@@ -18,6 +18,8 @@ public:
     virtual ~LinePlot();
     virtual void print(ofstream& out);
 private:
+    void printAxisX(ofstream& out)const;
+    void printAxisY(int i,ofstream& out)const;
     char fill;
     int width;
 };

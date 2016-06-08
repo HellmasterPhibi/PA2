@@ -45,7 +45,11 @@ void Graph::setRanks(){
     }
 }
 
-int Graph::digits(int input) const{
+/**doesnt work for numbers small than 0*/
+int Graph::digits(int input) const{ 
+    if(input == -1)
+        return 0;
+    
     string helpString; 
     ostringstream convert;
     convert << input;      

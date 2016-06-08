@@ -23,7 +23,8 @@ void BarPlot::printRow(ofstream& out, char sides, char fill)const{
 }
 
 void BarPlot::printAxisX(ofstream& out)const{
-    out << "   ";
+    for(int k = 0; k < digits(max) + 1; k++)
+            out << " ";
     int offset = 4;
     for(int j = cathegories.size()-1; j >= 0; j-- ){
         for(int k = 0; k < offset; k++)
