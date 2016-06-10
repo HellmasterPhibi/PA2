@@ -34,18 +34,22 @@ Graph::Graph(ifstream& infile) {
     }
 }
 
+    /**set ranks for the vector cathegories*/
 void Graph::setRanks(){
+    /**find the max value*/
     for(auto i: cathegories){
         if (max < i.count)
             max = i.count;
     }
-    max += max/5;
+    max += max/5; /** the max variable will be later used to determine the height, therefore it is better to have it a bit bigger than the actual maximum count*/
     for(size_t i = 0;i < cathegories.size();i++){
-        cathegories[i].rank = (cathegories[i].count * height) / max;
+        cathegories[i].rank = (cathegories[i].count * height) / max; /**linear transformation to new range that is printable in rows*/
     }
 }
 
-/**doesnt work for numbers small than 0*/
+/**
+ * @param number > 0
+ * @return number of digits of the number input, if input == -1, returns 0*/
 int Graph::digits(int input) const{ 
     if(input == -1)
         return 0;

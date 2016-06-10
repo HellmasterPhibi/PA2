@@ -9,13 +9,19 @@
 
 LinePlot::LinePlot(ifstream& infile): Graph(infile) {
     fill= '*';
-    width = 4;
+    width = 10;
+   // sort(cathegories.begin(),cathegories.end(),cmpFoo //not working, maybe change chathegories from vector to list?
+}
+
+bool LinePlot::cmpFoo (const TCathegory& i,const TCathegory& j)const { 
+    return (stoi(i.name) < stoi(j.name)); 
 }
 
 
 LinePlot::~LinePlot() {
 }
 
+/**prints only the values that are given in the input file*/
 void LinePlot::printAxisX(ofstream& out)const{
     for(int k = 0; k < digits(max) + 2; k++)
             out << " ";
@@ -35,7 +41,7 @@ void LinePlot::printAxisY(int i,ofstream& out)const{
                 out << val;
                 break;
             }
-            else if(i == height){
+            else if(i == height){ /**the highest value*/
                 val = max;
                 out << val;
                 break;
@@ -57,12 +63,27 @@ out << cathegoryNames[column] << endl;
         for(size_t j = 0; j < cathegories.size(); j++ ){
             if(cathegories[j].rank == i){
                 out << fill;
-                for(int k = 0; k < width;k++)
-                    out << " ";                
+                if(abs((cathegories[j].rank - cathegories[j+1].rank)) < 2 )
+                   for(int k = 0; k < width-2;k++)
+                        out << "-";    
+                else
+                    for(int k = 0; k < width;k++)
+                        out << " ";                
             } 
-            else{
-                for(int k = 0; k < width *2 +1;k++)
+            else if ( ((cathegories[j].rank < i) && (cathegories[j+1].rank < i)) ||
+                      ((cathegories[j].rank > i) && (cathegories[j+1].rank > i))
+                    ){
+                for(int k = 0; k < width +1;k++)
                     out << " ";   
+            }
+            else {
+                int spaces = abs(cathegories[j+1].rank - i);
+                for(int k = 0; k < width - spaces -1;k++)
+                    out << " ";   
+                out << "-";
+                for(int k = 0; k < spaces ;k++)
+                    out << " "; 
+                
             }
         }
         out << endl;

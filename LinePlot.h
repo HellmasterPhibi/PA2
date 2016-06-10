@@ -20,6 +20,7 @@ public:
 private:
     void printAxisX(ofstream& out)const;
     void printAxisY(int i,ofstream& out)const;
+    bool cmpFoo (const TCathegory& i,const TCathegory& j)const;
     char fill;
     int width;
 };

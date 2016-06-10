@@ -37,6 +37,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 OBJECTFILES= \
 	${OBJECTDIR}/BarPlot.o \
 	${OBJECTDIR}/Graph.o \
+	${OBJECTDIR}/Histogram.o \
 	${OBJECTDIR}/LinePlot.o \
 	${OBJECTDIR}/main.o
 
@@ -74,6 +75,11 @@ ${OBJECTDIR}/Graph.o: Graph.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Graph.o Graph.cpp
+
+${OBJECTDIR}/Histogram.o: Histogram.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Histogram.o Histogram.cpp
 
 ${OBJECTDIR}/LinePlot.o: LinePlot.cpp 
 	${MKDIR} -p ${OBJECTDIR}
