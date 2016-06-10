@@ -9,7 +9,7 @@
 
 LinePlot::LinePlot(ifstream& infile): Graph(infile) {
     fill= '*';
-    width = 10;
+    width = 6;
    // sort(cathegories.begin(),cathegories.end(),cmpFoo //not working, maybe change chathegories from vector to list?
 }
 
@@ -27,7 +27,7 @@ void LinePlot::printAxisX(ofstream& out)const{
             out << " ";
     for(size_t i = 0; i < cathegories.size(); i++  ){
         out << cathegories[i].name;
-        for(int j = 0; j < width+1; j++)
+        for(int j = 0; j < width - digits(stoi(cathegories[i].name)); j++)
             out << " ";
     }
 
@@ -63,9 +63,9 @@ out << cathegoryNames[column] << endl;
         for(size_t j = 0; j < cathegories.size(); j++ ){
             if(cathegories[j].rank == i){
                 out << fill;
-                if(abs((cathegories[j].rank - cathegories[j+1].rank)) < 2 )
-                   for(int k = 0; k < width-2;k++)
-                        out << "-";    
+                if(abs((cathegories[j].rank - cathegories[j+1].rank)) < 3 )
+                   for(int k = 0; k < width/2 -1 ;k++)
+                        out << " -";    
                 else
                     for(int k = 0; k < width;k++)
                         out << " ";                
@@ -76,7 +76,7 @@ out << cathegoryNames[column] << endl;
                 for(int k = 0; k < width +1;k++)
                     out << " ";   
             }
-            else {
+            else if ((j+1) != cathegories.size() ){
                 int spaces = abs(cathegories[j+1].rank - i);
                 for(int k = 0; k < width - spaces -1;k++)
                     out << " ";   
