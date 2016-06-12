@@ -22,25 +22,29 @@
 #include "Graph.h"
 #include "BarPlot.h"
 #include "LinePlot.h"
+#include "Histogram.h"
 
 using namespace std;
 
 int main(int argc, char** argv) {
-    
-    
     ofstream outfile;
-    outfile.open("lineTest",  ios::out);
+    outfile.open("histoTest",  ios::out);
     if (outfile.fail()){ return false;}
     
     ifstream infile;
     infile.open("sells.csv",  ios::in);
     if (infile.fail()){ cout << "Cannot open file" << endl;}
     
-    //BarPlot b(infile);
-    //b.print(outfile);
-    LinePlot l(infile);
-    l.print(outfile);
+    Histogram h(infile,1);
+    h.print(outfile);
     
+    //LinePlot l(infile,1);
+    //l.print(outfile);
+    
+    //BarPlot b(infile,1);
+    //b.print(outfile);
+    
+    infile.close();
     outfile.close();
     
     return 0;

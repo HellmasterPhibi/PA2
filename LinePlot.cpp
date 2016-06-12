@@ -7,14 +7,14 @@
 
 #include "LinePlot.h"
 
-LinePlot::LinePlot(ifstream& infile): Graph(infile) {
+using namespace std;
+
+LinePlot::LinePlot(ifstream& infile, int col): Graph(infile,col) {
     fill= '*';
     width = 6;
-   // sort(cathegories.begin(),cathegories.end(),cmpFoo //not working, maybe change chathegories from vector to list?
-}
-
-bool LinePlot::cmpFoo (const TCathegory& i,const TCathegory& j)const { 
+    sort(cathegories.begin(),cathegories.end(),[](const TCathegory& i,const TCathegory& j) { 
     return (stoi(i.name) < stoi(j.name)); 
+} );
 }
 
 
@@ -30,27 +30,10 @@ void LinePlot::printAxisX(ofstream& out)const{
         for(int j = 0; j < width - digits(stoi(cathegories[i].name)); j++)
             out << " ";
     }
+    out << endl;
 
 }
 
-void LinePlot::printAxisY(int i,ofstream& out)const{
-    int val = -1;
-        for(size_t k = 0; k < cathegories.size(); k++){
-            if(cathegories[k].rank == i){
-                val = cathegories[k].count;
-                out << val;
-                break;
-            }
-            else if(i == height){ /**the highest value*/
-                val = max;
-                out << val;
-                break;
-            }
-        }
-        for(int k = digits(val); k < digits(max); k++)
-            out << " ";
-        out << "| ";
-}
 
 
 void LinePlot::print(ofstream& out){
@@ -64,8 +47,12 @@ out << cathegoryNames[column] << endl;
             if(cathegories[j].rank == i){
                 out << fill;
                 if(abs((cathegories[j].rank - cathegories[j+1].rank)) < 3 )
-                   for(int k = 0; k < width/2 -1 ;k++)
-                        out << " -";    
+                   for(int k = 0; k < width -1 ;k++){
+                       if(k % 2)
+                        out << "-";    
+                       else
+                           out << " ";
+                   }
                 else
                     for(int k = 0; k < width;k++)
                         out << " ";                

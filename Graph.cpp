@@ -8,17 +8,18 @@
 #include "Graph.h"
 
 
-Graph::Graph(ifstream& infile) {
+Graph::Graph(ifstream& infile, int col) {
      height = 30;
-     column = 1;
+     column = col;
      max = 0;
+     min = INT_MAX;
     
      string line, tmp;
      if (infile.is_open()){
          getline (infile,line);
          stringstream names(line);
             while(getline(names, tmp,','))
-                cathegoryNames.push_back(tmp);
+                cathegoryNames.push_back(tmp); /**first line of the input document should be the names of cathegories*/
          
         while ( getline (infile,line) ){
             stringstream ss(line);
@@ -30,9 +31,10 @@ Graph::Graph(ifstream& infile) {
             cathegories.push_back(cath);
         }
          setRanks();
-        infile.close();
+        
     }
 }
+
 
     /**set ranks for the vector cathegories*/
 void Graph::setRanks(){
@@ -40,11 +42,31 @@ void Graph::setRanks(){
     for(auto i: cathegories){
         if (max < i.count)
             max = i.count;
+        if (min > i.count)
+            min = i.count;
     }
     max += max/5; /** the max variable will be later used to determine the height, therefore it is better to have it a bit bigger than the actual maximum count*/
     for(size_t i = 0;i < cathegories.size();i++){
-        cathegories[i].rank = (cathegories[i].count * height) / max; /**linear transformation to new range that is printable in rows*/
+        cathegories[i].rank = round ((cathegories[i].count * height) / max); /**linear transformation to new range that is printable in rows*/
     }
+}
+void Graph::printAxisY(int i,ofstream& out)const{
+    int val = -1;
+        for(size_t k = 0; k < cathegories.size(); k++){
+            if(cathegories[k].rank == i){
+                val = cathegories[k].count;
+                out << val;
+                break;
+            }
+            else if(i == height){ /**the highest value*/
+                val = max;
+                out << val;
+                break;
+            }
+        }
+        for(int k = digits(val); k < digits(max); k++)
+            out << " ";
+        out << "| ";
 }
 
 /**
@@ -63,9 +85,12 @@ int Graph::digits(int input) const{
     
 }
 
-
-Graph::Graph(const Graph& orig) {
+double Graph::round(double d)
+{
+  return floor(d + 0.5);
 }
+
+
 
 Graph::~Graph() {
 }

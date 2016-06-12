@@ -27,8 +27,7 @@
 using namespace std;
 class Graph {
 public:
-    Graph( ifstream& infile);
-    Graph(const Graph& orig);
+    Graph( ifstream& infile, int col);
     virtual ~Graph();
     virtual void print(ofstream&) = 0;
     void setRanks();
@@ -39,12 +38,15 @@ public:
         int rank;
     };
 protected:
+    void printAxisY(int i,ofstream& out)const;
     vector<TCathegory> cathegories;
     vector<string> cathegoryNames;
     int height;
     int column;
     int max;
+    int min;
     int digits(int) const;
+    double round(double d);
 };
 
 #endif	/* GRAPH_H */
