@@ -24,14 +24,16 @@ Graph::Graph(ifstream& infile, int col) {
         while ( getline (infile,line) ){
             stringstream ss(line);
             vector<string> tmpVec;
-            while(getline(ss, tmp,','))
+            while(getline(ss, tmp,',')){
                 tmpVec.push_back(tmp);
-            
+               //cout << tmpVec.size() - 1 << ": " << tmp << " ";
+            }
+            //cout << endl;
             TCathegory cath(tmpVec[0],stoi(tmpVec[column]));
             cathegories.push_back(cath);
         }
+         //cout << "soubor nacten" << endl;
          setRanks();
-         cout << "rounding  2245: " << roundInt(2245) << endl;
     }
 }
 

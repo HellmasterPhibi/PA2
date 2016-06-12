@@ -13,10 +13,10 @@ Histogram::Histogram(ifstream& infile, int col): Graph(infile,col) {
    maxCount = 0;
    initialize(colNum + 1);
    range = ((max - max/5 ) - min)/colNum;
-   cout << range << endl;
+   //cout << range << endl;
    for(size_t i = 0; i < cathegories.size();i++){
        int indx = (cathegories[i].count - min) / range; 
-       cout << cathegories[i].count << " spada pod indx " << indx << endl;
+       //cout << cathegories[i].count << " spada pod indx " << indx << endl;
        histoRanks[indx]++;
        
        if(maxCount < histoRanks[indx])

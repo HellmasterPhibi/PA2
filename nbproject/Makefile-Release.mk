@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/Graph.o \
 	${OBJECTDIR}/Histogram.o \
 	${OBJECTDIR}/LinePlot.o \
+	${OBJECTDIR}/PieChart.o \
 	${OBJECTDIR}/main.o
 
 
@@ -85,6 +86,11 @@ ${OBJECTDIR}/LinePlot.o: LinePlot.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/LinePlot.o LinePlot.cpp
+
+${OBJECTDIR}/PieChart.o: PieChart.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/PieChart.o PieChart.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
