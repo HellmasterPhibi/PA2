@@ -31,7 +31,7 @@ Graph::Graph(ifstream& infile, int col) {
             cathegories.push_back(cath);
         }
          setRanks();
-        
+         cout << "rounding  2245: " << roundInt(2245) << endl;
     }
 }
 
@@ -91,6 +91,15 @@ double Graph::round(double d)
 }
 
 
+ int Graph::roundInt(int input) const{
+     int divide = 1; 
+     for( int  i = 0; i <(digits(input) - 2); i++)
+         divide *= 10;
+     
+     input /= divide ;
+     input *= divide;
+     return input;
+ }
 
 Graph::~Graph() {
 }

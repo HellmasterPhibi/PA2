@@ -17,44 +17,43 @@ Histogram::Histogram(ifstream& infile, int col): Graph(infile,col) {
    for(size_t i = 0; i < cathegories.size();i++){
        int indx = (cathegories[i].count - min) / range; 
        cout << cathegories[i].count << " spada pod indx " << indx << endl;
-       histoRanks[indx].count++;
+       histoRanks[indx]++;
        
-       if(maxCount < histoRanks[indx].count)
-           maxCount = histoRanks[indx].count;
+       if(maxCount < histoRanks[indx])
+           maxCount = histoRanks[indx];
            
-       if(histoRanks[indx].localMax < cathegories[i].count)
-           histoRanks[indx].localMax = cathegories[i].count;
-       if(histoRanks[indx].localMin > cathegories[i].count)
-           histoRanks[indx].localMin = cathegories[i].count;
    
    }
 }
 void Histogram::initialize(int colNum){
     for (int i = 0; i < colNum; i ++){
-        THisto tmp;
-        histoRanks.push_back(tmp);
+        histoRanks.push_back(0);
     }
 }
 
 void Histogram::printAxisY(int i,ofstream& out)const{
     int val = -1;
-        for(size_t k = 0; k < histoRanks.size(); k++){
-            if(k == unsigned(i)){
-                val = k;
+        for(int k = 0; k < maxCount; k++){
+            if(k == i){
+                val = k + 1;
                 out << val;
                 break;
             }
         }
-        for(int k = digits(val); k < digits(histoRanks.size()); k++)
+        for(int k = digits(val); k < digits(maxCount); k++)
             out << " ";
         out << "| ";
 }
 
 void Histogram::printAxisX(ofstream& out)const{
-    out<< "   ";
+    for(int k = 0; k < digits(maxCount) + 2; k++)
+            out << " ";
     
     for(size_t j = 0; j < histoRanks.size(); j++ ){
-        out << j * range + min << "-" << j * range + range + min << " ";
+        out << roundInt(int(j * range + min)) << "-" << roundInt(int(j * range + range + min));
+        
+        for( int k = digits(j * range + min)+ digits(j * range + range + min)+1; k < width + 2; k++)
+            out << " ";
     }
 
 }
@@ -68,16 +67,18 @@ void Histogram::printRow(ofstream& out, char sides, char fill)const{
 }
 
 void Histogram::print(ofstream& out){
+    out << "frequency" << endl;
+    
      /**for every row **/
     for(int i = maxCount; i >= 0; i--){   
         printAxisY(i, out);
         
         /**for every column **/
         for(size_t j = 0; j < histoRanks.size(); j++ ){
-            if(histoRanks[j].count == i){
+            if(histoRanks[j] == i){
                 printRow(out, ' ', '_');
             } 
-            else if(histoRanks[j].count > i){
+            else if(histoRanks[j] > i){
                 printRow(out, '|', ' ');
             } 
             else{

@@ -47,6 +47,7 @@ protected:
     int min;
     int digits(int) const;
     double round(double d);
+    int roundInt(int input) const;
 };
 
 #endif	/* GRAPH_H */
