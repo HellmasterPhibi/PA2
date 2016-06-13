@@ -18,7 +18,9 @@ public:
     virtual ~PieChart();
     virtual void print(ofstream& out);
 private:
-
+    char pie [25][25];
+    double vectorAngle(int v1, int v2)const;
+    char filling(int v1, int v2) const;
 };
 
 #endif	/* PIECHART_H */

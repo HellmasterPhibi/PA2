@@ -23,6 +23,9 @@
 #include <sstream>
 #include <queue>
 #include <stdint.h>
+#include <math.h>
+
+#define PI 3.14159265
 
 using namespace std;
 class Graph {
