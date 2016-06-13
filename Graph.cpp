@@ -8,11 +8,13 @@
 #include "Graph.h"
 
 
-Graph::Graph(ifstream& infile, int col) {
+Graph::Graph(ifstream& infile, int col, int col2) {
      height = 30;
-     column = col;
+     column1 = col;
+     column2 = col2;
      max = 0;
      min = INT_MAX;
+     maxRank = 0;
     
      string line, tmp;
      if (infile.is_open()){
@@ -29,7 +31,7 @@ Graph::Graph(ifstream& infile, int col) {
                //cout << tmpVec.size() - 1 << ": " << tmp << " ";
             }
             //cout << endl;
-            TCathegory cath(tmpVec[0],stoi(tmpVec[column]));
+            TCathegory cath(tmpVec[column1],stoi(tmpVec[column2]));
             cathegories.push_back(cath);
         }
          //cout << "soubor nacten" << endl;
@@ -50,6 +52,8 @@ void Graph::setRanks(){
     max += max/5; /** the max variable will be later used to determine the height, therefore it is better to have it a bit bigger than the actual maximum count*/
     for(size_t i = 0;i < cathegories.size();i++){
         cathegories[i].rank = round ((cathegories[i].count * height) / max); /**linear transformation to new range that is printable in rows*/
+        if(maxRank < cathegories[i].rank)
+            maxRank = cathegories[i].rank;
     }
 }
 void Graph::printAxisY(int i,ofstream& out)const{

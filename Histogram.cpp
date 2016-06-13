@@ -7,7 +7,7 @@
 
 #include "Histogram.h"
 
-Histogram::Histogram(ifstream& infile, int col): Graph(infile,col) {
+Histogram::Histogram(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
    width = 10;
    int colNum = 7;
    maxCount = 0;

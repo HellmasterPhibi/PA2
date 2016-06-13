@@ -19,20 +19,22 @@ int main(int argc, char** argv) {
     if (outfile.fail()){ return false;}
     
     ifstream infile;
-    infile.open("preplatky.csv",  ios::in);
-    if (infile.fail()){ cout << "Cannot open file" << endl;}
+    infile.open("grades.csv",  ios::in);
+    if (infile.fail()){ cout << "Cannot open file" << endl;
+    return -1;
+    }
     
-    PieChart p(infile,12);
+    PieChart p(infile,0,1);
     p.print(outfile);
     
     //Histogram h(infile,12);
     //h.print(outfile);
     
-    //LinePlot l(infile,1);
+    //LinePlot l(infile,1, 2);
     //l.print(outfile);
     
-    //BarPlot b(infile,1);
-    //b.print(outfile);
+    //BarPlot b(infile,0,1);
+   // b.print(outfile);
     
     infile.close();
     outfile.close();

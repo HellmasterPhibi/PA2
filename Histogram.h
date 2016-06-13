@@ -14,7 +14,7 @@ using namespace std;
 
 class Histogram : public Graph  {
 public:
-    Histogram(ifstream& infile, int col);
+    Histogram(ifstream& infile, int col, int col2);
     virtual ~Histogram();
     virtual void print(ofstream& out);
 private:

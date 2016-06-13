@@ -15,7 +15,7 @@ using namespace std;
 
 class BarPlot: public Graph {
 public:
-    BarPlot(ifstream& infile, int col);
+    BarPlot(ifstream& infile, int col, int col2);
     virtual ~BarPlot();
     virtual void print(ofstream& out);
 private:

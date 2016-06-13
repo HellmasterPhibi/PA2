@@ -14,7 +14,7 @@ using namespace std;
 
 class LinePlot: public Graph  {
 public:
-    LinePlot(ifstream& infile, int col);
+    LinePlot(ifstream& infile, int col, int col2);
     virtual ~LinePlot();
     virtual void print(ofstream& out);
 private:

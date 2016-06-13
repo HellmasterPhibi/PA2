@@ -9,7 +9,7 @@
 
 using namespace std;
 
-LinePlot::LinePlot(ifstream& infile, int col): Graph(infile,col) {
+LinePlot::LinePlot(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
     fill= '*';
     width = 6;
     sort(cathegories.begin(),cathegories.end(),[](const TCathegory& i,const TCathegory& j) { 
@@ -37,7 +37,7 @@ void LinePlot::printAxisX(ofstream& out)const{
 
 
 void LinePlot::print(ofstream& out){
-out << cathegoryNames[column] << endl;
+out << cathegoryNames[column2] << endl;
     /**for every row **/
     for(int i = height; i >= 0; i--){        
         printAxisY(i, out);

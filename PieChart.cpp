@@ -7,7 +7,9 @@
 
 #include "PieChart.h"
 
-PieChart::PieChart(ifstream& infile, int col): Graph(infile,col) {
+PieChart::PieChart(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
+    setDegrees();
+    
     for(int i = 0; i < 25; i ++){
         for(int j = 0; j < 25; j++){
             int v1 = 13 - i;
@@ -16,49 +18,73 @@ PieChart::PieChart(ifstream& infile, int col): Graph(infile,col) {
             if (distance > 12)
                 pie[i][j] = ' ';
             else
-                pie[i][j] = filling(v1, v2);
-            
+                pie[i][j] = filling(v1, v2);            
         }
     }
 
 }
+void PieChart::setDegrees(){
+    int allranks = 0;
+    for(size_t i = 0;i < cathegories.size();i++){        
+        allranks += cathegories[i].rank;
+    }
+    double single = 360.0/ allranks;
+    
+    for(size_t i = 0;i < cathegories.size();i++){        
+        degrees.push_back(single * cathegories[i].rank);
+    }
+    setDegreeBorders();
+}
+
+void PieChart::setDegreeBorders(){
+    int sum = 0;
+    for(size_t i = 0;i < cathegories.size();i++){
+        char filling = i + 35;
+        double deg = degrees[i] + sum;    
+        if(i + 1 == cathegories.size() )
+            deg = 360;
+        fill. push_back(make_pair(filling, deg));
+        sum += degrees[i];        
+    }
+}
 
 char PieChart::filling(int v1, int v2) const{
-    if(vectorAngle(v1,v2) <= 45)
-        return '&';
-    else if ((vectorAngle(v1,v2) > 45) && (vectorAngle(v1,v2) <= 90))
-        return '#';
-    else if ((vectorAngle(v1,v2) > 90) && (vectorAngle(v1,v2) <= 200))
-        return '$';
-    else        
-        return '@';
-
+    double angle = vectorAngle(v1,v2);
+    
+    for(size_t i = 0;i < fill.size();i++){
+        if(angle < fill[i].second)
+            return fill[i].first;
+    }
+    return ' ';
 }
 
 double PieChart::vectorAngle(int v1, int v2)const{
     int u1 = 0;
     int u2 = 13;
     
-    //double cosAlpha = (u1*v1 + u2*v2) / (sqrt(u1 * u1 + u2 * u2) * sqrt(v1 * v1 + v2 * v2));
-    //double degree = acos(cosAlpha)  * 180.0 / PI;
-    double angle = atan2(u1, u2) - atan2(v1, v2);
+    double angle = atan2(v1, v2) - atan2(u1, u2);
     angle = angle * 360 / (2*PI);
-    if (angle < 0){
-    angle = angle + 360;
+    
+    if (angle < 0)
+        angle = angle + 360;
+            
+    return angle;        
 }
-    
-    /*
-    if((v1 * u2 - v2 * u1) < 0)
-        degree += 180;
-    */
-    //cout << "cos alpha " << cosAlpha << " degrees: " << degree << endl;
-    
-    return angle;
-    
-    
+
+
+void PieChart::printLegend(ofstream& out) const{
+    for(size_t i = 0; i < cathegories.size(); i++){
+        out << cathegories[i].name << ": ";
+        for( int j = 0; j < 2; j ++)
+            out << fill[i].first;
+        out << "    ";
+    }
+
 }
 
 void PieChart::print(ofstream& out){
+    printLegend(out);
+    out << endl << endl;
     
     for(int i = 0; i < 25; i++){
         for(int j = 0; j < 25; j++){

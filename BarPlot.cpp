@@ -7,7 +7,7 @@
 
 #include "BarPlot.h"
 
-BarPlot::BarPlot(ifstream& infile, int col): Graph(infile,col) {
+BarPlot::BarPlot(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
     width = 10;
 }
 
@@ -44,7 +44,7 @@ void BarPlot::printAxisX(ofstream& out)const{
 }
 
 void BarPlot::print(ofstream& out){
-    out << cathegoryNames[column] << endl;
+    out << cathegoryNames[column2] << endl;
     
     /**for every row **/
     for(int i = height; i >= 0; i--){        
