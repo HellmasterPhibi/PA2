@@ -30,7 +30,7 @@
 using namespace std;
 class Graph {
 public:
-    Graph( ifstream& infile, int col, int col2);
+    Graph( ifstream& infile, int col, int col2,  vector<char>& filling);
     virtual ~Graph();
     virtual void print(ofstream&) = 0;
     void setRanks();
@@ -41,6 +41,7 @@ public:
         int rank;
     };
 protected:
+    void setFillings();
     void printAxisY(int i,ofstream& out)const;
     vector<TCathegory> cathegories;
     vector<string> cathegoryNames;
@@ -53,6 +54,7 @@ protected:
     int digits(int) const;
     double round(double d);
     int roundInt(int input) const;
+    vector<char> fill;
 };
 
 #endif	/* GRAPH_H */

@@ -8,16 +8,19 @@
 #include "Graph.h"
 
 
-Graph::Graph(ifstream& infile, int col, int col2) {
+Graph::Graph(ifstream& infile, int col, int col2,  vector<char>& fillWith) {
      height = 30;
      column1 = col;
      column2 = col2;
      max = 0;
      min = INT_MAX;
      maxRank = 0;
+     fill = fillWith;
     
      string line, tmp;
      if (infile.is_open()){
+         infile.clear();
+         infile.seekg(0, ios::beg);
          getline (infile,line);
          stringstream names(line);
             while(getline(names, tmp,','))
@@ -37,7 +40,32 @@ Graph::Graph(ifstream& infile, int col, int col2) {
          //cout << "soubor nacten" << endl;
          setRanks();
     }
+    // setFillings();
 }
+
+
+void Graph::setFillings(){
+    cout << "opening conf in constructor" << endl;
+    ifstream conf;
+    if (!conf.is_open()){
+        cout << "opening" << endl;
+        conf.open("config",  ios::in);
+    }
+    
+    cout << "opened" << endl;
+    string line, tmp;
+    for(int i = 0; i < 4; i++){
+        getline(conf, line); /**The first 4 lines of the configuration file just specify the format.*/
+        cout << " --" << line << "--" << endl;
+    }
+    
+    stringstream ss(line);
+    while (getline(ss, tmp, ' ')) {
+        cout << tmp << endl;
+            fill.push_back(tmp[0]);        
+    }
+}
+
 
 
     /**set ranks for the vector cathegories*/

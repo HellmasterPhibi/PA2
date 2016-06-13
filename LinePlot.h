@@ -14,12 +14,11 @@ using namespace std;
 
 class LinePlot: public Graph  {
 public:
-    LinePlot(ifstream& infile, int col, int col2);
+    LinePlot(ifstream& infile, int col, int col2,  vector<char>& fillWith);
     virtual ~LinePlot();
     virtual void print(ofstream& out);
 private:
     void printAxisX(ofstream& out)const;
-    char fill;
     int width;
 };
 

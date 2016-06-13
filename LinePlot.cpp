@@ -9,8 +9,7 @@
 
 using namespace std;
 
-LinePlot::LinePlot(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
-    fill= '*';
+LinePlot::LinePlot(ifstream& infile, int col, int col2,  vector<char>& fillWith): Graph(infile,col, col2, fillWith) {
     width = 6;
     sort(cathegories.begin(),cathegories.end(),[](const TCathegory& i,const TCathegory& j) { 
     return (stoi(i.name) < stoi(j.name)); 
@@ -45,11 +44,11 @@ out << cathegoryNames[column2] << endl;
         /**for every value **/
         for(size_t j = 0; j < cathegories.size(); j++ ){
             if(cathegories[j].rank == i){
-                out << fill;
+                out << fill[0];
                 if(abs((cathegories[j].rank - cathegories[j+1].rank)) < 3 )
                    for(int k = 0; k < width -1 ;k++){
                        if(k % 2)
-                        out << "-";    
+                        out << fill[0];    
                        else
                            out << " ";
                    }
@@ -67,7 +66,7 @@ out << cathegoryNames[column2] << endl;
                 int spaces = abs(cathegories[j+1].rank - i);
                 for(int k = 0; k < width - spaces -1;k++)
                     out << " ";   
-                out << "-";
+                out << fill[0];
                 for(int k = 0; k < spaces ;k++)
                     out << " "; 
                 

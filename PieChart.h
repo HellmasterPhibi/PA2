@@ -14,14 +14,14 @@ using namespace std;
 
 class PieChart :  public Graph {
 public:
-    PieChart(ifstream& infile, int col, int col2);
+    PieChart(ifstream& infile, int col, int col2,  vector<char>& fillWith);
     virtual ~PieChart();
     virtual void print(ofstream& out);
 private:
     char pie [25][25];
     double vectorAngle(int v1, int v2)const;
     char filling(int v1, int v2) const;
-    vector<pair<char,double> > fill; /**first = fill, second = max degree up to which the fill should be placed*/
+    vector<pair<char,double> > fillWith; /**first = fill, second = max degree up to which the fill should be placed*/
     vector<double> degrees;
     void setDegrees();
     void setDegreeBorders();

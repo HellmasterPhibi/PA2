@@ -7,7 +7,7 @@
 
 #include "PieChart.h"
 
-PieChart::PieChart(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
+PieChart::PieChart(ifstream& infile, int col, int col2,  vector<char>& fillWith): Graph(infile,col, col2, fillWith) {
     setDegrees();
     
     for(int i = 0; i < 25; i ++){
@@ -39,11 +39,11 @@ void PieChart::setDegrees(){
 void PieChart::setDegreeBorders(){
     int sum = 0;
     for(size_t i = 0;i < cathegories.size();i++){
-        char filling = i + 35;
+        char filling = fill[i];
         double deg = degrees[i] + sum;    
         if(i + 1 == cathegories.size() )
             deg = 360;
-        fill. push_back(make_pair(filling, deg));
+        fillWith. push_back(make_pair(filling, deg));
         sum += degrees[i];        
     }
 }
@@ -51,9 +51,9 @@ void PieChart::setDegreeBorders(){
 char PieChart::filling(int v1, int v2) const{
     double angle = vectorAngle(v1,v2);
     
-    for(size_t i = 0;i < fill.size();i++){
-        if(angle < fill[i].second)
-            return fill[i].first;
+    for(size_t i = 0;i < fillWith.size();i++){
+        if(angle < fillWith[i].second)
+            return fillWith[i].first;
     }
     return ' ';
 }
@@ -76,7 +76,7 @@ void PieChart::printLegend(ofstream& out) const{
     for(size_t i = 0; i < cathegories.size(); i++){
         out << cathegories[i].name << ": ";
         for( int j = 0; j < 2; j ++)
-            out << fill[i].first;
+            out << fillWith[i].first;
         out << "    ";
     }
 
@@ -92,6 +92,7 @@ void PieChart::print(ofstream& out){
         }
         out << endl;
     }
+    out << endl;
 }
 
 

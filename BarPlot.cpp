@@ -7,7 +7,7 @@
 
 #include "BarPlot.h"
 
-BarPlot::BarPlot(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
+BarPlot::BarPlot(ifstream& infile, int col, int col2,  vector<char>& fillWith): Graph(infile,col, col2, fillWith) {
     width = 10;
 }
 
@@ -56,7 +56,7 @@ void BarPlot::print(ofstream& out){
                 printRow(out, ' ', '_');
             } 
             else if(cathegories[j].rank > i){
-                printRow(out, '|', ' ');
+                printRow(out, '|', fill[j]);
             } 
             else{
                 printRow(out, ' ', ' ');
@@ -66,4 +66,6 @@ void BarPlot::print(ofstream& out){
         out << endl;
     }
     printAxisX(out);
+    
+    out << endl;
 }

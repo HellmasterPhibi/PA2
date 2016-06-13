@@ -7,7 +7,7 @@
 
 #include "Histogram.h"
 
-Histogram::Histogram(ifstream& infile, int col, int col2): Graph(infile,col, col2) {
+Histogram::Histogram(ifstream& infile, int col, int col2,  vector<char>& fillWith): Graph(infile,col, col2, fillWith) {
    width = 10;
    int colNum = 7;
    maxCount = 0;
@@ -79,7 +79,7 @@ void Histogram::print(ofstream& out){
                 printRow(out, ' ', '_');
             } 
             else if(histoRanks[j] > i){
-                printRow(out, '|', ' ');
+                printRow(out, '|', fill[j]);
             } 
             else{
                 printRow(out, ' ', ' ');
@@ -88,6 +88,8 @@ void Histogram::print(ofstream& out){
         out << endl;
     }
     printAxisX(out);
+    
+    out << endl;
 }
 
 Histogram::~Histogram() {

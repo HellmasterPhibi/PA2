@@ -1,0 +1,15 @@
+Write character you want the output graphs filled with divided by space. If you want to print a certain type of graph, mark it 1, else 0. The line under the graph type name speciefies the columns of the input file.
+
+Filling: 
+@ # $ % * & ~ / % % % % % % % % % % % % % % % %
+
+BarPlot : 1 
+0, 1
+LinePlot : 0
+0,1
+PieChart : 1
+0, 1
+Histogram : 0
+2
+
+

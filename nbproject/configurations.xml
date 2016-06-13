@@ -37,6 +37,7 @@
       <itemPath>histoTest</itemPath>
       <itemPath>lineTest</itemPath>
       <itemPath>newTest</itemPath>
+      <itemPath>out</itemPath>
       <itemPath>pieTest</itemPath>
     </logicalFolder>
   </logicalFolder>
